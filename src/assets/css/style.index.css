@@ -1,0 +1,15 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Oculta las flechas */
+    margin: 0; /* Elimina el margen */
+}
+
+/* Para Firefox */
+input[type=number] {
+    -moz-appearance: textfield; /* Oculta las flechas */
+}
+
+/* Para navegadores modernos (alternativa general) */
+input[type=number] {
+    appearance: textfield; /* Elimina la apariencia de input numérico */
+}

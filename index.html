@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/assets/css/style.index.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>prueba</h1>
+    <h1>Papel de Trabajo Finiquito / Liquidación</h1>
 
-    <form action="" method="post" id="formulario" autocomplete="off">
+    <!-- <form action="" method="post" id="formulario" autocomplete="off"> -->
+    <form action="" method="post" id="formulario" >
         <!-- <label for="">Nombre</label>
         <input type="text" name="Nombre">
         <br>
@@ -37,10 +39,10 @@
         <input type="text" name="departamento">
         <br>
         <label for="">Salario por dia</label>
-        <input type="text" name="salario_dia">
+        <input type="text" name="salario_dia" id="salario_dia">
         <br>
         <label for="">Sueldo mensual</label>
-        <input type="text" name="sueldo_mensual">
+        <input type="text" name="sueldo_mensual" id="sueldo_mensual">
         <br>
         <label for="">RFC</label>
         <input type="text" name="RFC">
@@ -48,14 +50,17 @@
         <label for="">NSS</label>
         <input type="text" name="NSS">
         <br>
+        <label for="">CURP</label>
+        <input type="text" name="CURP">
+        <br>
         <label for="">Feecha de ingreso</label>
-        <input type="text" name="fecha_ingreso">
+        <input type="date" name="fecha_ingreso">
         <br>
         <label for="">Fecha de reingreso</label>
-        <input type="text" name="fecha_reingreso">
+        <input type="date" name="fecha_reingreso">
         <br>
         <label for="">Fecha de baja</label>
-        <input type="text" name="fecha_baja">
+        <input type="date" name="fecha_baja">
         <br>
         <label for="">Domicilio</label>
         <input type="text" name="domicilio">
@@ -67,13 +72,13 @@
         <input type="text" name="estado">
         <br>
         <label for="">Fecha de nacimiento</label>
-        <input type="text" name="fecha_nacimiento">
+        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento">
         <br>
         <label for="">Decimal</label>
-        <input type="text" name="_decimal">
+        <input type="text" name="_decimal" id="decimal">
         <br>
         <label for="">Edad</label>
-        <input type="text" name="edad">
+        <input type="text" name="edad" id="edad">
         <br>
         <label for="">Telefono</label>
         <input type="text" name="telefono">
@@ -85,7 +90,7 @@
         <input type="text" name="estado_civil">
         <br>
         <label for="">Correo</label>
-        <input type="text" name="correo">
+        <input type="email" name="correo">
         <br>
         <button type="submit" id="enviar">enviar</button>
     </form>
