@@ -1,7 +1,14 @@
+@font-face{
+    font-family: 'Roboto-VariableFont_wdth,wght';
+    src: url('../font/Roboto-VariableFont_wdth\,wght.ttf') format('truetype');
+}
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Roboto-VariableFont_wdth,wght';
 }
+/* --------------estilos globales------------------ */
+
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none; /* Oculta las flechas */
@@ -17,7 +24,94 @@ input[type=number] {
 input[type=number] {
     appearance: textfield; /* Elimina la apariencia de input numérico */
 }
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+/* Estilo para el botón primario */
+.btn-primary {
+  background-color: rgb(0, 123, 255); /* Azul vibrante */
+  color: #ffffff;           /* Texto blanco */
+  border-color: #007bff;    /* Borde del mismo color */
+}
+.btn-secondary {
+  background-color: rgb(107, 117, 126); /* Azul vibrante */
+  color: #ffffff;           /* Texto blanco */
+  border-color: #6B757E;    /* Borde del mismo color */
+}
+.btn-success {
+  background-color: rgb(42, 167, 65); /* Azul vibrante */
+  color: #ffffff;           /* Texto blanco */
+  border-color: #2AA741;    /* Borde del mismo color */
+}
 
+/* Efectos al pasar el cursor y enfocar */
+.btn-primary:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+  border-color: #0056b3;
+}
+.btn-secondary:hover {
+  background-color: #6C757D; /* Azul más oscuro */
+  border-color: #6C757D;
+}
+.btn-success:hover {
+  background-color: #28A745; /* Azul más oscuro */
+  border-color: #28A745;
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra para accesibilidad */
+}
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(107, 117, 126, 0.25); /* Sombra para accesibilidad */
+}
+.btn-success:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(42, 167, 65, 0.25); /* Sombra para accesibilidad */
+}
+.btn-alone{
+    border: none;
+    background-color: #ffffff00;
+    cursor: pointer;
+}
+.mainGo {
+  display: inline-block;
+  position: relative;
+  color: #000;
+  text-decoration: none;
+  font-size: 24px;
+}
+.mainGo::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #4c5786;
+  /* El truco: escala 0 y origen a la derecha */
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  /* transform-origin: bottom right; */
+  transition: transform 0.3s ease-out;
+}
+.mainGo:hover::after {
+  /* Al hover, escala a 1 y cambia el origen a la izquierda */
+  transform: scaleX(1);
+  transform-origin: bottom left;
+  /* transform-origin: bottom left; */
+}
+/* ------------------------------------------------ */
+/* -------------estilo main -------------------- */
 .btn-arrow{
     margin-left: 15px;
     border-radius: 4px;
@@ -47,10 +141,6 @@ input[type=number] {
 .opciones{
     position: relative;
     padding: 25px 100px 25px 25px;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
     border: 1px solid #2E344E;
 }
 
@@ -85,3 +175,23 @@ input[type=number] {
         margin-top: 15px;
     }
 }
+/* --------------------------------------------- */
+.titulo{
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+.titulo a{
+    width: 80px;
+    height: 36px;
+    margin-right: 20%;
+    padding-bottom: 5px;
+}
+
+/* ------------estilos alta empleado------------- */
+
+/* --------------------------------------------- */
+
+/* ------------estilo propiedades empleados ----------- */
+
+/* ---------------------------------------------------- */

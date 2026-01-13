@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/assets/css/altaEmpleado.css">
-        <link rel="shortcut icon" href="/src/assets/img/IconCLA.png" type="image/x-icon">
+    <link rel="stylesheet" href="./src/assets/css/style.index.css">
+    <link rel="shortcut icon" href="/src/assets/img/IconCLA.png" type="image/x-icon">
     <title>Mexico</title>
 </head>
+
 <body>
     <div class="titulo">
-        <img src="/src/assets/img/return.png" alt="">
+        <a type="button" class="btn-alone mainGo" onclick="volverHome()"><img src="/src/assets/img/return.png"
+                alt=""></a>
         <h1>Alta Empleado</h1>
     </div>
 
     <!-- <form action="" method="post" id="formulario" autocomplete="off"> -->
-    <form action="" method="post" id="formulario" >
+    <form action="" method="post" id="formulario">
         <label for="">Codigo de empleado</label>
         <input type="text" name="codigo_empleado">
         <br>
@@ -84,8 +87,9 @@
         <label for="">Correo</label>
         <input type="email" name="correo">
         <br>
-        <button type="submit" id="enviar">enviar</button>
+        <button type="submit" class="btn btn-primary" id="enviar">enviar</button>
     </form>
 </body>
 <script src="./src/assets/js/altaEmpleado.js"></script>
+
 </html>

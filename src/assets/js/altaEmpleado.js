@@ -23,6 +23,10 @@ document.getElementById('salario_dia').addEventListener('blur', ()=>{
     }
 })
 
+volverHome =()=>{
+    window.location.href = 'http://127.0.0.1:5500/index.html';
+}
+
 document.getElementById('fecha_nacimiento').addEventListener('blur', ()=>{
 // console.log(new Date(fechaNacimiento.value))
     let fechaActual = new Date()
