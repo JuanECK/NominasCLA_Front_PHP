@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none; /* Oculta las flechas */
@@ -12,4 +16,72 @@ input[type=number] {
 /* Para navegadores modernos (alternativa general) */
 input[type=number] {
     appearance: textfield; /* Elimina la apariencia de input numérico */
+}
+
+.btn-arrow{
+    margin-left: 15px;
+    border-radius: 4px;
+    border: none;
+    background-color: #ffffff00;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
+.btn-arrow:hover{
+    transform:translateX(3px);
+}
+
+.cont-img{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.opciones{
+    position: relative;
+    padding: 25px 100px 25px 25px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    border: 1px solid #2E344E;
+}
+
+.opciones div{
+    display: flex;
+    margin: 20px 0 ;   
+    
+}
+
+@media screen and (max-width: 453px ) {
+    .btn-arrow .AR1{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 312px ) {
+    .btn-arrow .AR1{
+        margin-top: 25px;
+    }
+    .btn-arrow .AR3{
+        margin-top: 15px;
+    }
+}
+@media screen and (max-width: 263px ) {
+    .btn-arrow .AR1{
+        margin-top: 30px;
+    }
+    .btn-arrow .AR2{
+        margin-top: 10px;
+    }
+    .btn-arrow .AR3{
+        margin-top: 15px;
+    }
 }
