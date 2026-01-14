@@ -1,6 +1,7 @@
 
 let enviar = document.getElementById('enviar');
 let formulario = document.querySelector('#formulario');
+let buscaEmp = document.getElementById('buscar');
 
 
 formulario.addEventListener( 'submit', function(e){
@@ -31,6 +32,19 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_propiedad
         console.log('termino')
         const respData = await resp.json();
         console.log('desde el PHP', respData);
+}
+
+buscarEmpleado = async () => {
+    console.log(buscaEmp.value)
+    const resp = await fetch( 'http://localhost/BackNominas/public/buscaEmpPropidades', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'empleado': buscaEmp.value})
+    })
+    const data = await resp.json();
+    console.log('desde el PHP ',data)
 }
 
 // 54
