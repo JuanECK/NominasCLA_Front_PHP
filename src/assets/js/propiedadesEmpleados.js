@@ -32,7 +32,7 @@ desactiva = () => {
     let itemDisabled = document.querySelectorAll(".itemDisabled")
     itemDisabled.forEach( item => {
         item.disabled = false
-        item.required = false//dev
+        // item.required = false//dev
     } )
     // let formInput = document.querySelectorAll('#formulario input')
     // formInput.forEach( input => {
@@ -51,7 +51,7 @@ inputsDisabledAgain = () => {
     let itemDisabled = document.querySelectorAll(".itemDisabled")
     itemDisabled.forEach( item => {
         item.disabled = true;
-        item.required = true;//dev
+        // item.required = true;//dev
         item.value = '';
     } )
 
@@ -78,8 +78,13 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_propiedad
         console.log('termino')
         const respData = await resp.json();
         console.log('desde el PHP', respData);
-        // buscaEmp.value = '';
-        // inputsDisabledAgain();
+        if(respData.status == 200){
+            buscaEmp.value = '';
+            inputsDisabledAgain();
+            alert('Datos ingresados con exito')
+            return
+        }
+        alert( 'Ocurrio algo, y no se pudo guardar la informacion' )
 }
 
 buscarEmpleado = async () => {

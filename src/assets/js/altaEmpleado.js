@@ -5,6 +5,10 @@ let sueldoMes = document.getElementById('sueldo_mensual');
 let fechaNacimiento = document.getElementById('fecha_nacimiento');
 let decimal = document.getElementById('decimal');
 let edadC = document.getElementById('edad');
+let alta = document.getElementById('alta');
+let edita = document.getElementById('edita');
+let buscarEmpleado = document.getElementById('buscarEmpleado');
+let buscar = document.getElementById('buscar');
 
 formulario.addEventListener( 'submit', function(e){
     console.log('enviando')
@@ -25,6 +29,15 @@ document.getElementById('salario_dia').addEventListener('blur', ()=>{
 
 volverHome =()=>{
     window.location.href = 'http://127.0.0.1:5500/index.html';
+}
+
+AltaEdita =() =>{
+    if(buscar.value != ''){
+        buscar.value = '';
+    }
+    alta.classList.toggle('oculto')
+    edita.classList.toggle('oculto')
+    buscarEmpleado.classList.toggle('oculto')
 }
 
 document.getElementById('fecha_nacimiento').addEventListener('blur', ()=>{
@@ -54,6 +67,14 @@ document.getElementById('fecha_nacimiento').addEventListener('blur', ()=>{
 
 })
 
+resetInput = () => {
+    let formInput = document.querySelectorAll('#formulario input')
+    formInput.forEach( input => {
+        input.value = '';
+        // input.disabled = false
+        // input.required = false // dev
+    } )
+}
 
 const enviarFormulario  = async ( formulario ) =>{
     let datos = new FormData();
@@ -69,4 +90,29 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_empleado'
         console.log('termino')
         const respData = await resp.json();
         console.log('desde el PHP', respData);
+        if(respData.status == 200){
+            resetInput();
+        }
+}
+
+buscarEmpleado_A = async () => {
+
+    if(buscar.value == '') {
+        alert('ingresa un codigo de empleado')
+        return
+    }
+    const resp = await fetch( 'http://localhost/BackNominas/public/buscaEmpleadoEdicion', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'empleado': buscar.value})
+    })
+    const data = await resp.json();
+    console.log('desde el PHP ',data)
+    if( data[0].id == "Sin datos" ){
+        alert('el usuario no existe')
+        return 
+    }
+
 }
