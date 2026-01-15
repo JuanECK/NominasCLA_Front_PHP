@@ -78,8 +78,8 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_propiedad
         console.log('termino')
         const respData = await resp.json();
         console.log('desde el PHP', respData);
-        buscaEmp.value = '';
-        inputsDisabledAgain();
+        // buscaEmp.value = '';
+        // inputsDisabledAgain();
 }
 
 buscarEmpleado = async () => {
