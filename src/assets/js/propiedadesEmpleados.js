@@ -2,11 +2,13 @@
 let enviar = document.getElementById('enviar');
 let formulario = document.querySelector('#formulario');
 let buscaEmp = document.getElementById('buscar');
+let empleado_id = document.getElementById('empleado_id');
 
 
 formulario.addEventListener( 'submit', function(e){
     console.log('enviando')
     e.preventDefault();
+    // noEditable();
     const datos = new FormData( formulario );
     const datosObj = Object.fromEntries( datos.entries() );
     enviarFormulario( datosObj);
@@ -15,6 +17,50 @@ formulario.addEventListener( 'submit', function(e){
 
 volverHome =()=>{
     window.location.href = 'http://127.0.0.1:5500/index.html';
+}
+
+// noEditable = () => {
+//     let noEditable = document.querySelectorAll(".noEditable")
+//     noEditable.forEach( item => {
+//         item.disabled = false
+//         item.required = false
+//     } )
+// }
+
+desactiva = () => {
+    enviar.disabled = false; // dev
+    let itemDisabled = document.querySelectorAll(".itemDisabled")
+    itemDisabled.forEach( item => {
+        item.disabled = false
+        item.required = false//dev
+    } )
+    // let formInput = document.querySelectorAll('#formulario input')
+    // formInput.forEach( input => {
+    //     input.disabled = false
+    //     input.required = false // dev
+    // } )
+}
+
+ver = ()=>{
+    // buscaEmp.value = '555';
+    // console.log(buscaEmp.value)
+}
+
+inputsDisabledAgain = () => {
+    enviar.disabled = true; // dev
+    let itemDisabled = document.querySelectorAll(".itemDisabled")
+    itemDisabled.forEach( item => {
+        item.disabled = true;
+        item.required = true;//dev
+        item.value = '';
+    } )
+
+    // let noEditable = document.querySelectorAll(".noEditable")
+    // noEditable.forEach( item => {
+    //     item.disabled = true
+    //     item.required = true
+    // } )
+
 }
 
 const enviarFormulario  = async ( formulario ) =>{
@@ -32,10 +78,16 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_propiedad
         console.log('termino')
         const respData = await resp.json();
         console.log('desde el PHP', respData);
+        buscaEmp.value = '';
+        inputsDisabledAgain();
 }
 
 buscarEmpleado = async () => {
-    console.log(buscaEmp.value)
+    // console.log(buscaEmp.value)
+    if(buscaEmp.value == '') {
+        alert('ingresa un codigo de empleado')
+        return
+    }
     const resp = await fetch( 'http://localhost/BackNominas/public/buscaEmpPropidades', {
         method: 'POST',
         headers: {
@@ -45,7 +97,15 @@ buscarEmpleado = async () => {
     })
     const data = await resp.json();
     console.log('desde el PHP ',data)
+    if( data[0].id == "Sin datos" ){
+        alert('el usuario no existe')
+        return 
+    }
+    enviar.disabled = false;
+    empleado_id.value = data[0].id
+    desactiva();
 }
+
 
 // 54
 // create table empleados_data (

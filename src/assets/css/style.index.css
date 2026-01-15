@@ -28,6 +28,10 @@ input[type=number] {
 input[type=text]{
     padding: 5px 2px;
 }
+select{
+    padding: 5px 2px;
+    width: 100px;
+}
 input[type=text]:focus{
     outline: none;
 }
@@ -42,35 +46,47 @@ input[type=text]:focus{
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
+
 /* Estilo para el botón primario */
 .btn-primary {
   background-color: rgb(0, 123, 255); /* Azul vibrante */
   color: #ffffff;           /* Texto blanco */
-  border-color: #007bff;    /* Borde del mismo color */
+  border-color: none;    /* Borde del mismo color */
+}
+.btn-primary:disabled {
+  background-color: rgba(0, 123, 255, 0.425); /* Azul vibrante */
+  color: #ffffff;           /* Texto blanco */
+  border-color: none; 
+  cursor: not-allowed; /* Cursor de no permitido */
+  opacity: 0.6;   /* Borde del mismo color */
 }
 .btn-secondary {
   background-color: rgb(107, 117, 126); /* Azul vibrante */
   color: #ffffff;           /* Texto blanco */
-  border-color: #6B757E;    /* Borde del mismo color */
+  border-color: none;    /* Borde del mismo color */
 }
 .btn-success {
   background-color: rgb(42, 167, 65); /* Azul vibrante */
   color: #ffffff;           /* Texto blanco */
-  border-color: #2AA741;    /* Borde del mismo color */
+  border-color: none;    /* Borde del mismo color */
 }
 
 /* Efectos al pasar el cursor y enfocar */
 .btn-primary:hover {
   background-color: #0056b3; /* Azul más oscuro */
-  border-color: #0056b3;
+  border-color: none;
+}
+.btn-primary:hover:disabled {
+  background-color: rgba(0, 123, 255, 0.425); /* Azul más oscuro */
+  border-color: none;
 }
 .btn-secondary:hover {
   background-color: #6C757D; /* Azul más oscuro */
-  border-color: #6C757D;
+  border-color: none;
 }
 .btn-success:hover {
   background-color: #28A745; /* Azul más oscuro */
-  border-color: #28A745;
+  border-color: none;
 }
 
 .btn-primary:focus {
@@ -116,6 +132,24 @@ input[type=text]:focus{
   transform: scaleX(1);
   transform-origin: bottom left;
   /* transform-origin: bottom left; */
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.porcent{
+    position: relative;
+}
+.porcent input{
+    padding-right: 25px ;
+    margin-left: 4px;
+    width: 135px;
+}
+.porcent i {
+    position: absolute;
+    right: 10px;
+    top: 6px;
 }
 /* ------------------------------------------------ */
 /* -------------estilo main -------------------- */

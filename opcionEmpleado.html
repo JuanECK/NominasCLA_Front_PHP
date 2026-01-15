@@ -23,227 +23,296 @@
             <button type="button" class="btn btn-primary" onclick="buscarEmpleado()">buscar</button>
         </div>
     </div>
+
+    <button onclick="desactiva()">desactiva</button>
+    <button onclick="ver()">ver</button>
     <!-- <form action="" method="post" id="formulario" autocomplete="off"> -->
     <form action="" method="post" id="formulario">
         <div class="inputPT">
-            <input type="text" name="empleado_id" value="005" hidden="true">
+            <input type="text" name="empleado_id" id="empleado_id" hidden="true" required>
         </div>
         <div class="inputPT">
             <label for="">Indemnizacion 90 dias</label>
-            <input type="text" name="indemnizacion_90_dias">
+            <!-- <input type="text" name="indemnizacion_90_dias" disabled="true" required> -->
+            <select class="itemDisabled" name="indemnizacion_90_dias" id="" disabled="true" required>
+                <option value="" selected></option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+            </select>
         </div>
 
         <div class="inputPT">
             <label for="">Indemnizacion 20 dias</label>
-            <input type="text" name="indemnizacion_20_dias">
+            <!-- <input type="text" name="indemnizacion_20_dias" disabled="true" required> -->
+            <select class="itemDisabled" name="indemnizacion_20_dias" id="" disabled="true" required>
+                <option value="" selected></option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+            </select>
         </div>
 
         <div class="inputPT">
             <label for="">Prima de antiguedad</label>
-            <input type="text" name="prima_antiguedad">
+            <!-- <input type="text" name="prima_antiguedad" disabled="true" required> -->
+            <select class="itemDisabled" name="prima_antiguedad" id="" disabled="true" required>
+                <option value="" selected></option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+            </select>
         </div>
 
-        <div class="inputPT">
+        <!-- <div class="inputPT">
             <label for="">Dias aguinaldo</label>
-            <input type="text" name="dias_aguinaldo">
+            <input type="text" class="noEditable" name="dias_aguinaldo" disabled="true" required>
         </div>
 
         <div class="inputPT">
             <label for="">Dias prima vacacional</label>
-            <input type="text" name="dias_prima_vacacional">
+            <input class="noEditable" type="text" name="dias_prima_vacacional" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Dias vacaciones</label>
-            <input type="text" name="dias_vacaciones">
-        </div>
+            <input type="text" class="noEditable" name="dias_vacaciones" disabled="true" required>
+        </div> -->
         <label for="">Prestacion vacaciones</label>
-        <input type="text" name="prestacion_vacaciones">
+        <input type="text" class="itemDisabled" name="prestacion_vacaciones" disabled="true" required>
         <div class="inputPT">
-            <label for="">Prestacion pv</label>
-            <input type="text" name="prestacion_pv">
+            <div class="row">
+                <label for="">Prestacion pv</label>
+                <div class="porcent">
+                    <input class="itemDisabled" type="text" name="prestacion_pv" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Prestacion aguinaldo</label>
-            <input type="text" name="prestacion_aguinaldo">
+                <label for="">Prestacion aguinaldo</label>
+                <input type="text" class="itemDisabled" name="prestacion_aguinaldo" disabled="true" required>
+            </div>
         </div>
         <div class="inputPT">
             <label for="">Dias del año</label>
-            <input type="text" name="dias_año">
+            <input type="text" class="itemDisabled" name="dias_año" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Salario diario</label>
-            <input type="text" name="salario_diario">
+            <input type="text" class="itemDisabled" name="salario_diario" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Salario diario integrado</label>
-            <input type="text" name="salario_diario_integrado">
+            <input type="text" class="itemDisabled" name="salario_diario_integrado" disabled="true" required>
         </div>
-        <div class="inputPT">
+        <!-- <div class="inputPT">
             <label for="">Salario P/indemnizaciones</label>
-            <input type="text" name="salario_P_indemnizaciones">
+            <input type="text" class="noEditable" name="salario_P_indemnizaciones" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Salario tope prima antiguedad</label>
-            <input type="text" name="salario_tope_prima_antiguedad">
-        </div>
+            <input type="text" class="noEditable" name="salario_tope_prima_antiguedad" disabled="true" required>
+        </div> -->
         <div class="inputPT">
             <label for="">UMA</label>
-            <input type="text" name="uma">
+            <input type="text" class="itemDisabled" name="uma" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Salario minimo general</label>
-            <input type="text" name="salario_minimo_general">
+            <input type="text" class="itemDisabled" name="salario_minimo_general" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Dias a pagar</label>
-            <input type="text" name="dias_a_pagar">
+            <input type="text" class="itemDisabled" name="dias_a_pagar" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Horas del turno</label>
-            <input type="text" name="horas_turno">
+            <input type="text" class="itemDisabled" name="horas_turno" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Faltas del periodo</label>
-            <input type="text" name="faltas_periodo">
+            <input type="text" class="itemDisabled" name="faltas_periodo" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Incapacidades</label>
-            <input type="text" name="incapacidades">
+            <input type="text" class="itemDisabled" name="incapacidades" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Dias para vales despensa efectivo</label>
-            <input type="text" name="dias_vales_despensa_efectivo">
+            <input type="text" class="itemDisabled" name="dias_vales_despensa_efectivo" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Dias para vales despensa especie</label>
-            <input type="text" name="dias_vales_despensa_especie">
+            <input type="text" class="itemDisabled" name="dias_vales_despensa_especie" disabled="true" required>
         </div>
-        <div class="inputPT">
+        <!-- <div class="inputPT">
             <label for="">Antiguedad para 20 dias</label>
-            <input type="text" name="antiguedad_20_dias">
-        </div>
+            <input type="text" class="noEditable" name="antiguedad_20_dias" disabled="true" required>
+        </div> -->
         <div class="inputPT">
             <label for="">UMI</label>
-            <input type="text" name="umi">
+            <input type="text" class="itemDisabled" name="umi" disabled="true" required>
         </div>
         <div class="inputPT">
-            <label for="">Septimo dia</label>
-            <input type="text" name="septimo_dia">
+            <div class="row">
+                <label for="">Septimo dia</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="septimo_dia" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Infonavit %</label>
-            <input type="text" name="infonavit_porcent">
+            <div class="row">
+                <label for="">Infonavit %</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="infonavit_porcent" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
             <label for="">Infonavit F.D.</label>
-            <input type="text" name="infonavit_FD">
+            <input type="text" class="itemDisabled" name="infonavit_FD" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Infonavit C.F.</label>
-            <input type="text" name="infonavit_CF">
+            <input type="text" class="itemDisabled" name="infonavit_CF" disabled="true" required>
         </div>
-        <div class="inputPT">
+        <!-- <div class="inputPT">
             <label for="">Dias IMSS</label>
-            <input type="text" name="dias_imss">
-        </div>
+            <input type="text" class="noEditable" name="dias_imss" disabled="true" required>
+        </div> -->
         <div class="inputPT">
             <label for="">Dias bimestre</label>
-            <input type="text" name="dias_bimestre">
+            <input type="text" class="itemDisabled" name="dias_bimestre" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Dias infonavit</label>
-            <input type="text" name="dias_infonavit">
+            <input type="text" class="itemDisabled" name="dias_infonavit" disabled="true" required>
         </div>
         <div class="inputPT">
-            <label for="">Vales despensa QNA</label>
-            <input type="text" name="vales_despensa_QNA">
+            <div class="row">
+                <label for="">Vales despensa QNA</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="vales_despensa_QNA" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Vales despensa SEM</label>
-            <input type="text" name="vales_despensa_SEM">
+            <div class="row">
+                <label for="">Vales despensa SEM</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="vales_despensa_SEM" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Fondo ahorro QNA</label>
-            <input type="text" name="fondo_ahorro_QNA">
+            <div class="row">
+                <label for="">Fondo ahorro QNA</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="fondo_ahorro_QNA" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">fondo ahorro SEM</label>
-            <input type="text" name="fondo_ahorro_SEM">
+            <div class="row">
+                <label for="">fondo ahorro SEM</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="fondo_ahorro_SEM" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Cuota sindical</label>
-            <input type="text" name="cuota_sindical">
+            <div class="row">
+                <label for="">Cuota sindical</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="cuota_sindical" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Pension alimanticia</label>
-            <input type="text" name="pension_alimanticia">
+            <div class="row">
+                <label for="">Pension alimanticia</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="pension_alimanticia" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
-            <label for="">Bono puntualidad</label>
-            <input type="text" name="bono_puntualidad">
+            <div class="row">
+                <label for="">Bono puntualidad</label>
+                <div class="porcent">
+                    <input type="text" class="itemDisabled" name="bono_puntualidad" disabled="true" required>
+                    <i>%</i>
+                </div>
+            </div>
         </div>
         <div class="inputPT">
             <label for="">Vacaciones pendientes</label>
-            <input type="text" name="vacaciones_pendientes">
+            <input type="text" class="itemDisabled" name="vacaciones_pendientes" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum ausentismos</label>
-            <input type="text" name="acum_ausentismos">
+            <input type="text" class="itemDisabled" name="acum_ausentismos" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum incapacidades</label>
-            <input type="text" name="acum_incapacidades">
+            <input type="text" class="itemDisabled" name="acum_incapacidades" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum infonavit</label>
-            <input type="text" name="acum_infonavit">
+            <input type="text" class="itemDisabled" name="acum_infonavit" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum seguro daños info</label>
-            <input type="text" name="acum_seguro_daños_info">
+            <input type="text" class="itemDisabled" name="acum_seguro_daños_info" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum fondo ahorro</label>
-            <input type="text" name="acum_fondo_ahorro">
+            <input type="text" class="itemDisabled" name="acum_fondo_ahorro" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum exento prima vac</label>
-            <input type="text" name="acum_exento_prima_vac">
+            <input type="text" class="itemDisabled" name="acum_exento_prima_vac" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Acum exento aguinaldo</label>
-            <input type="text" name="acum_exento_aguinaldo">
+            <input type="text" class="itemDisabled" name="acum_exento_aguinaldo" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Base gravable pendiente</label>
-            <input type="text" name="base_gravable_pendiente">
+            <input type="text" class="itemDisabled" name="base_gravable_pendiente" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Aguinaldo SDI</label>
-            <input type="text" name="aguinaldo_SDI">
+            <input type="text" class="itemDisabled" name="aguinaldo_SDI" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Prima vacacional SDI</label>
-            <input type="text" name="prima_vacacional_SDI">
+            <input type="text" class="itemDisabled" name="prima_vacacional_SDI" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Variable SDI</label>
-            <input type="text" name="variable_SDI">
+            <input type="text" class="itemDisabled" name="variable_SDI" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Fondo ahorro SDI</label>
-            <input type="text" name="fondo_ahorro_SDI">
+            <input type="text" class="itemDisabled" name="fondo_ahorro_SDI" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Despensa SDI</label>
-            <input type="text" name="despensa_SDI">
+            <input type="text" class="itemDisabled" name="despensa_SDI" disabled="true" required>
         </div>
         <div class="inputPT">
             <label for="">Gratificación</label>
-            <input type="text" name="gratificación">
+            <input type="text" class="itemDisabled" name="gratificación" disabled="true" required>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="enviar">enviar</button>
+        <button type="submit" class="btn btn-primary" id="enviar" disabled="true">enviar</button>
     </form>
 
 </body>
