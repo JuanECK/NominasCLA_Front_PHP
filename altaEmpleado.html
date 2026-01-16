@@ -17,8 +17,8 @@
     </div>
 
     <div class="">
-        <button type="button" class="btn btn-primary oculto" onclick="AltaEdita()" id="alta">Alta</button>
-        <button type="button" class="btn btn-secondary " onclick="AltaEdita()" id="edita">Editar Empleado</button>
+        <button type="button" class="btn btn-primary oculto" onclick="Alta()" id="alta">Alta</button>
+        <button type="button" class="btn btn-secondary " onclick="Edita()" id="edita">Editar Empleado</button>
     </div>
     <div class="busqueda oculto" id="buscarEmpleado">
         <label for="">busqueda por codigo de empleado</label>
@@ -99,6 +99,7 @@
         <input type="email" name="correo" required>
         <br>
         <button type="submit" class="btn btn-success" id="enviar" >enviar</button>
+        <button type="button" class="btn btn-success oculto" id="enviarEdicion" disabled="true">Guardar Cambios</button>
     </form>
 </body>
 <script src="./src/assets/js/altaEmpleado.js"></script>
