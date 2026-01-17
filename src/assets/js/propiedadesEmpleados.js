@@ -3,7 +3,7 @@ let enviar = document.getElementById('enviar');
 let formulario = document.querySelector('#formulario');
 let buscaEmp = document.getElementById('buscar');
 let empleado_id = document.getElementById('empleado_id');
-
+let respBusqueda;
 
 formulario.addEventListener( 'submit', function(e){
     console.log('enviando')
@@ -18,7 +18,15 @@ formulario.addEventListener( 'submit', function(e){
 volverHome =()=>{
     window.location.href = 'http://127.0.0.1:5500/index.html';
 }
-
+hayDatosBusqueda = () => {
+    if(buscaEmp.value == '' && respBusqueda != ''){
+        console.log('borra')
+        buscaEmp.value = '';
+        respBusqueda = '';
+        return
+    }
+    console.log('no borrar')
+}
 // noEditable = () => {
 //     let noEditable = document.querySelectorAll(".noEditable")
 //     noEditable.forEach( item => {
@@ -90,7 +98,7 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_propiedad
 buscarEmpleado = async () => {
     // console.log(buscaEmp.value)
     if(buscaEmp.value == '') {
-        alert('ingresa un codigo de empleado')
+        alert('Ingresa un codigo de empleado')
         return
     }
     const resp = await fetch( 'http://localhost/BackNominas/public/buscaEmpPropidades', {
@@ -102,12 +110,19 @@ buscarEmpleado = async () => {
     })
     const data = await resp.json();
     console.log('desde el PHP ',data)
-    if( data[0].id == "Sin datos" ){
-        alert('el usuario no existe')
-        return 
+    if ( data[0].resp ){
+        inputsDisabledAgain();
+        if( data[0].resp == 1 ){
+            alert('El usuario ya cuenta con un registro de propiedades');
+            return 
+        }else if( data[0].resp == 0 ){
+            alert('El usuario no existe');
+            return
+        }
     }
     enviar.disabled = false;
-    empleado_id.value = data[0].id
+    empleado_id.value = data[0].id;
+    respBusqueda = data[0].id;
     desactiva();
 }
 
