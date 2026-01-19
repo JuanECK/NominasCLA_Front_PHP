@@ -40,19 +40,28 @@ volverHome =()=>{
     window.location.href = 'http://127.0.0.1:5500/index.html';
 }
 
-Alta =() =>{
+// Alta =() =>{
+//     if(buscar.value != ''){
+//         buscar.value = '';
+//     }
+//     enviar.classList.toggle('oculto')
+//     enviarEdicion.classList.toggle('oculto')
+//     alta.classList.toggle('oculto')
+//     edita.classList.toggle('oculto')
+//     buscarEmpleado.classList.toggle('oculto')
+
+// }
+Edita =() =>{
     if(buscar.value != ''){
         buscar.value = '';
     }
-    alta.classList.toggle('oculto')
-    edita.classList.toggle('oculto')
-    buscarEmpleado.classList.toggle('oculto')
-}
-Edita =() =>{
-    // if(buscar.value != ''){
-    //     buscar.value = '';
-    // }
 
+    console.log(buscarEmpleado.classList.contains('oculto') )
+    if ( buscarEmpleado.classList.contains('oculto') ){
+        bloqueaInputs();
+    }else{
+        resetInput();
+    }
     enviar.classList.toggle('oculto')
     enviarEdicion.classList.toggle('oculto')
     alta.classList.toggle('oculto')
@@ -91,7 +100,16 @@ resetInput = () => {
     let formInput = document.querySelectorAll('#formulario input')
     formInput.forEach( input => {
         input.value = '';
-        // input.disabled = false
+        input.disabled = false
+        // input.required = false // dev
+    } )
+}
+
+bloqueaInputs = () => {
+        let formInput = document.querySelectorAll('#formulario input')
+    formInput.forEach( input => {
+        input.value = '';
+        input.disabled = true
         // input.required = false // dev
     } )
 }
@@ -155,11 +173,61 @@ buscarEmpleado_A = async () => {
     })
     const data = await resp.json();
     console.log('desde el PHP ',data)
-    if( data[0].id == "Sin datos" ){
+    if( data[0].resultado == 0 ){
         alert('el usuario no existe')
         return 
     }
+    resetInput();
     llenaInputsData(data)
     enviarEdicion.disabled = false;
 
 }
+
+// set 
+//  `codigo_empleado` VARCHAR(50), 
+//  `empleado` VARCHAR(200), 
+//  `estatus` VARCHAR(50), 
+//  `puesto` VARCHAR(250), 
+//  `departamento` VARCHAR(250), 
+//  `salario_dia` DECIMAL(10,2), 
+//  `sueldo_mensual` DECIMAL(10,2), 
+//  `RFC` VARCHAR(100), 
+//  `NSS` VARCHAR(100), 
+//  `CURP` VARCHAR(255), 
+//  `fecha_ingreso` DATE, 
+//  `fecha_reingreso` DATE, 
+//  `fecha_baja` DATE, 
+//  `domicilio` VARCHAR(300), 
+//  `codigo_pos` INT, 
+//  `estado` VARCHAR(250), 
+//  `fecha_nacimiento` DATE, 
+//  `decimal` DECIMAL(10,2), 
+//  `edad` INT, 
+//  `telefono` INT, 
+//  `sexo` VARCHAR(50), 
+//  `estado_civil` VARCHAR(100), 
+//  `correo` VARCHAR(255)
+
+// codigo_empleado = codigo_empleado1,
+// empleado = empleado1,
+// estatus = estatus1,
+// puesto = puesto1,
+// departamento = departamento1,
+// salario_dia = salario_dia1,
+// sueldo_mensual = sueldo_mensual1,
+// RFC = RFC1,
+// NSS = NSS1,
+// CURP = CURP1,
+// fecha_ingreso = fecha_ingreso1,
+// fecha_reingreso = fecha_reingreso1,
+// fecha_baja = fecha_baja1,
+// domicilio = domicilio1,
+// codigo_pos = codigo_pos1,
+// estado = estado1,
+// fecha_nacimiento = fecha_nacimiento1,
+// _decimal = decimal1,
+// edad = edad1,
+// telefono = telefono1,
+// sexo = sexo1,
+// estado_civil = estado_civil1,
+// correo = correo1,
