@@ -13,14 +13,20 @@
     <div class="titulo">
         <a type="button" class="btn-alone mainGo" onclick="volverHome()"><img src="/src/assets/img/return.png"
             alt=""></a>
-            <h1>Propiedades del Empleado</h1>
-        </div>
-        
+            <h1 id="title">Propiedades del Empleado</h1>
+    </div>
+
+    <div class="">
+        <button type="button" class="btn btn-primary oculto" onclick="Edita()" id="alta">Alta Propiedades</button>
+        <button type="button" class="btn btn-secondary " onclick="Edita()" id="edita">Editar Propiedades</button>
+    </div>
+
     <div class="busqueda">
         <label for="">busqueda por codigo de empleado</label>
         <div>
             <input type="text" id="buscar" onchange="hayDatosBusqueda()">
-            <button type="button" class="btn btn-primary" onclick="buscarEmpleado()">buscar</button>
+            <button type="button" class="btn btn-primary" id="btnBusqueda" onclick="buscarEmpleado()">buscar</button>
+            <button type="button" class="btn btn-primary oculto" id="btnEdita" onclick="buscarEmpleadoEdicion()">Editar</button>
         </div>
     </div>
 
@@ -310,10 +316,13 @@
         </div>
         <div class="inputPT">
             <label for="">Gratificación</label>
-            <input type="text" class="itemDisabled" name="gratificación" disabled="true" required>
+            <input type="text" class="itemDisabled" name="gratificacion" disabled="true" required>
         </div>
 
         <button type="submit" class="btn btn-success" id="enviar" disabled="true">enviar</button>
+        <button type="button" class="btn btn-success oculto" id="enviarEdicion" onclick="actualizaEmpleados()" disabled="true">Guardar Cambios</button>
+        <button type="button" class="btn btn-secondary" id="cancelar" onclick="inputsDisabledAgain()" disabled="true">cancelar</button>
+
     </form>
 
 </body>

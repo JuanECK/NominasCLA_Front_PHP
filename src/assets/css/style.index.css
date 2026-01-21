@@ -265,3 +265,32 @@ input[type=text]:focus{
 /* ------------estilo propiedades empleados ----------- */
 
 /* ---------------------------------------------------- */
+/* ------------estilo papel de trabajo ----------- */
+/* .table_div_1, .table_Propiedades{
+    display:grid ;
+    grid-template-columns: 50% 50%;
+    margin: 10px;
+    width: 80vw;
+}
+.table_div_1 .column_PT{
+    margin: 0 30px 0 30px;
+}
+.table_div_1 .column_PT div label:nth-child(1){
+    display: inline-block;
+    width: 150px;
+    border-right: 1px solid #000;
+    
+} */
+
+.TableDatosEmpleado{
+    margin: 10px;
+}
+.TableDatosEmpleado body tr td:nth-child(3),
+.TableDatosEmpleado body tr td:nth-child(4){
+    margin-left: 30px;
+
+}
+
+
+
+/* ---------------------------------------------------- */

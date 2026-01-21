@@ -3,6 +3,13 @@ let enviar = document.getElementById('enviar');
 let formulario = document.querySelector('#formulario');
 let buscaEmp = document.getElementById('buscar');
 let empleado_id = document.getElementById('empleado_id');
+let alta = document.getElementById('alta');
+let edita = document.getElementById('edita');
+let buscar = document.getElementById('buscar');
+let btnEdita = document.getElementById('btnEdita');
+let btnBusqueda = document.getElementById('btnBusqueda');
+let enviarEdicion = document.getElementById('enviarEdicion');
+let cancelar = document.getElementById('cancelar');
 let respBusqueda;
 
 formulario.addEventListener( 'submit', function(e){
@@ -15,14 +22,38 @@ formulario.addEventListener( 'submit', function(e){
     
 } )
 
-volverHome =()=>{
+const volverHome =()=>{
     window.location.href = 'http://127.0.0.1:5500/index.html';
 }
-hayDatosBusqueda = () => {
+
+const Edita =() =>{
+    if(buscar.value != ''){
+        buscar.value = '';
+    }
+
+    // console.log(buscarEmpleado.classList.contains('oculto') )
+    if ( btnEdita.classList.contains('oculto') ){
+        inputsDisabledAgain();
+        title.innerText = 'Edicion de Propiedades'
+    }else{
+        title.innerText = 'Propiedades del Empleado'
+        inputsDisabledAgain();
+    }
+    enviar.classList.toggle('oculto')
+    enviarEdicion.classList.toggle('oculto')
+    alta.classList.toggle('oculto')
+    edita.classList.toggle('oculto')
+    btnBusqueda.classList.toggle('oculto')
+    btnEdita.classList.toggle('oculto')
+    // buscarEmpleado.classList.toggle('oculto')
+}
+
+const hayDatosBusqueda = () => {
     if(buscaEmp.value == '' && respBusqueda != ''){
         console.log('borra')
         buscaEmp.value = '';
         respBusqueda = '';
+        inputsDisabledAgain();
         return
     }
     console.log('no borrar')
@@ -35,11 +66,13 @@ hayDatosBusqueda = () => {
 //     } )
 // }
 
-desactiva = () => {
+const desactiva = () => {
     enviar.disabled = false; // dev
+    cancelar.disabled = false; // dev
     let itemDisabled = document.querySelectorAll(".itemDisabled")
     itemDisabled.forEach( item => {
         item.disabled = false
+        item.value = '';
         // item.required = false//dev
     } )
     // let formInput = document.querySelectorAll('#formulario input')
@@ -54,8 +87,11 @@ ver = ()=>{
     // console.log(buscaEmp.value)
 }
 
-inputsDisabledAgain = () => {
+const inputsDisabledAgain = () => {
     enviar.disabled = true; // dev
+    enviarEdicion.disabled = true; // dev
+    cancelar.disabled = true; // dev
+    buscar.value = '';
     let itemDisabled = document.querySelectorAll(".itemDisabled")
     itemDisabled.forEach( item => {
         item.disabled = true;
@@ -69,6 +105,45 @@ inputsDisabledAgain = () => {
     //     item.required = true
     // } )
 
+}
+
+const llenaInputsData = ( array ) => {
+    // console.log(Object.entries(array))
+    Object.entries(array[0]).forEach(([key, valor]) => {
+        // console.log(key+' - '+valor)
+    const input = document.getElementsByName(key)[0]; 
+    if (input) {
+        // if(valor == '0000-00-00') return
+        input.value = valor; 
+    }
+  });
+
+  buscar.value = '';
+}
+
+const actualizaEmpleados = async () =>{
+    let datos = new FormData( formulario );
+    datos.append( 'carga', JSON.stringify([Object.fromEntries( datos.entries() )]) );
+
+// console.log( 'desde el HTML ', datos.get('carga') );
+
+const resp = await fetch( 'http://localhost/BackNominas/public/actualizaPropiedades',{
+            method:'POST',
+            body: datos,
+            redirect: "follow",
+        } )
+        console.log('termino')
+        const respData = await resp.json();
+        console.log('desde el PHP', respData);
+        if(respData[0].resp == 1){
+            buscaEmp.value = '';
+            enviarEdicion.disabled = true;
+            cancelar.disabled = true;
+            inputsDisabledAgain();
+            alert('Datos actualizados con exito')
+            return
+        }
+        alert( 'Ocurrio algo, y no se pudo actualizar los datos' )
 }
 
 const enviarFormulario  = async ( formulario ) =>{
@@ -95,7 +170,7 @@ const resp = await fetch( 'http://localhost/BackNominas/public/inserta_propiedad
         alert( 'Ocurrio algo, y no se pudo guardar la informacion' )
 }
 
-buscarEmpleado = async () => {
+const buscarEmpleado = async () => {
     // console.log(buscaEmp.value)
     if(buscaEmp.value == '') {
         alert('Ingresa un codigo de empleado')
@@ -121,9 +196,42 @@ buscarEmpleado = async () => {
         }
     }
     enviar.disabled = false;
+    cancelar.disabled = false;
     empleado_id.value = data[0].id;
     respBusqueda = data[0].id;
     desactiva();
+}
+
+const buscarEmpleadoEdicion = async () => {
+    // console.log(buscaEmp.value)
+    if(buscaEmp.value == '') {
+        alert('Ingresa un codigo de empleado')
+        return
+    }
+    const resp = await fetch( 'http://localhost/BackNominas/public/buscaPropiedadesEmpleado', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'empleado': buscaEmp.value})
+    })
+    const data = await resp.json();
+    console.log('desde el PHP ',data)
+    if ( data[0].resp ){
+        inputsDisabledAgain();
+        if( data[0].resp == 1 ){
+            alert('El usuario no cuenta con propiedades para editar');
+            return 
+        }else if( data[0].resp == 0 ){
+            alert('El usuario no existe');
+            return
+        }
+    }
+
+    desactiva();
+    llenaInputsData(data)
+    enviarEdicion.disabled = false;
+    cancelar.disabled = false;
 }
 
 
@@ -242,3 +350,4 @@ buscarEmpleado = async () => {
 // `fondo_ahorro_SDI`,
 // `despensa_SDI`,
 // `gratificación`
+

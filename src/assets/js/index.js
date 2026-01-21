@@ -15,6 +15,9 @@
 // }())
 
 
+irHojaTrabajo = () => {
+    window.location.href = 'http://127.0.0.1:5500/papelTrabajo.html';
+}
 irAltaEmpleado = () => {
     window.location.href = 'http://127.0.0.1:5500/altaEmpleado.html';
 }

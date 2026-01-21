@@ -13,11 +13,11 @@
     <div class="titulo">
         <a type="button" class="btn-alone mainGo" onclick="volverHome()"><img src="/src/assets/img/return.png"
                 alt=""></a>
-        <h1>Alta Empleado</h1>
+        <h1 id="title">Alta Empleado</h1>
     </div>
 
     <div class="">
-        <button type="button" class="btn btn-primary oculto" onclick="Edita()" id="alta">Alta</button>
+        <button type="button" class="btn btn-primary oculto" onclick="Edita()" id="alta">Alta Empleado</button>
         <button type="button" class="btn btn-secondary " onclick="Edita()" id="edita">Editar Empleado</button>
     </div>
     <div class="busqueda oculto" id="buscarEmpleado">
@@ -37,6 +37,9 @@
         <br>
         <label for="">Estatus</label>
         <input type="text" name="estatus" required>
+        <br>
+        <label for="">Tipo de Nomina</label>
+        <input type="text" name="tipo_nomina" required>
         <br>
         <label for="">Puesto</label>
         <input type="text" name="puesto" required>
@@ -99,7 +102,7 @@
         <input type="email" name="correo" required>
         <br>
         <button type="submit" class="btn btn-success" id="enviar" >enviar</button>
-        <button type="button" class="btn btn-success oculto" id="enviarEdicion" disabled="true">Guardar Cambios</button>
+        <button type="button" class="btn btn-success oculto" id="enviarEdicion" onclick="actualizaEmpleados()" disabled="true">Guardar Cambios</button>
     </form>
 </body>
 <script src="./src/assets/js/altaEmpleado.js"></script>
