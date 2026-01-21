@@ -28,6 +28,7 @@ input[type=number] {
 input[type=text], input[type=email], input[type=date]{
     padding: 5px 2px;
 }
+
 select{
     padding: 5px 2px;
     width: 100px;
@@ -266,30 +267,42 @@ input[type=text]:focus{
 
 /* ---------------------------------------------------- */
 /* ------------estilo papel de trabajo ----------- */
-/* .table_div_1, .table_Propiedades{
-    display:grid ;
-    grid-template-columns: 50% 50%;
-    margin: 10px;
-    width: 80vw;
-}
-.table_div_1 .column_PT{
-    margin: 0 30px 0 30px;
-}
-.table_div_1 .column_PT div label:nth-child(1){
-    display: inline-block;
-    width: 150px;
-    border-right: 1px solid #000;
-    
-} */
+
 
 .TableDatosEmpleado{
     margin: 10px;
+    border-collapse: collapse;
+    border: 1px solid #d8d8d8;
 }
-.TableDatosEmpleado body tr td:nth-child(3),
-.TableDatosEmpleado body tr td:nth-child(4){
-    margin-left: 30px;
 
+.TableDatosEmpleado tbody tr td:nth-child(1),
+.TableDatosEmpleado tbody tr td:nth-child(3){
+ width: 180px;
+ border-right: 1px solid #d8d8d8;
+ border-bottom: 1px solid #d8d8d8;
+ padding-left: 10px;
+ background-color: rgb(15, 36, 62);;
+ color: #d8d8d8;
+ 
+ /* background-color: #0056b3; */
 }
+.TableDatosEmpleado tbody tr td:nth-child(2),
+.TableDatosEmpleado tbody tr td:nth-child(4){
+    width: 500px;
+    border-bottom: 1px solid #d8d8d8;
+    border-right: 3px solid #d8d8d8;
+    padding-left: 10px;
+    background-color: rgb(15, 36, 62);
+    color: #d8d8d8;
+    /* background-color: #4c5786; */
+}
+
+.table_Propiedades input[type=date],
+.table_Propiedades select {
+    padding: 0;
+}
+
+
 
 
 

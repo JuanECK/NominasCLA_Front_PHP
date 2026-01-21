@@ -20,25 +20,25 @@ let title = document.getElementById('title');
 // como en la respuesta de la base de datos
 // ---------------------------------------------------
 
-formulario.addEventListener( 'submit', function(e){
+formulario.addEventListener('submit', function (e) {
     console.log('enviando')
     e.preventDefault();
-    const datos = new FormData( formulario );
-    const datosObj = Object.fromEntries( datos.entries() );
+    const datos = new FormData(formulario);
+    const datosObj = Object.fromEntries(datos.entries());
     // console.log(datosObj)
-    enviarFormulario( datosObj);
-    
-} )
+    enviarFormulario(datosObj);
 
-document.getElementById('salario_dia').addEventListener('blur', ()=>{
-    if(sueldoDia.value){
+})
+
+document.getElementById('salario_dia').addEventListener('blur', () => {
+    if (sueldoDia.value) {
         let res = sueldoDia.value * 30
         console.log(res.toFixed(2))
         sueldoMes.value = res.toFixed(2)
     }
 })
 
-volverHome =()=>{
+volverHome = () => {
     window.location.href = 'http://127.0.0.1:5500/index.html';
 }
 
@@ -53,16 +53,16 @@ volverHome =()=>{
 //     buscarEmpleado.classList.toggle('oculto')
 
 // }
-Edita =() =>{
-    if(buscar.value != ''){
+Edita = () => {
+    if (buscar.value != '') {
         buscar.value = '';
     }
 
-    console.log(buscarEmpleado.classList.contains('oculto') )
-    if ( buscarEmpleado.classList.contains('oculto') ){
+    console.log(buscarEmpleado.classList.contains('oculto'))
+    if (buscarEmpleado.classList.contains('oculto')) {
         bloqueaInputs();
         title.innerText = 'Edicion de Empleados'
-    }else{
+    } else {
         title.innerText = 'Alta de Empleados'
         resetInput();
     }
@@ -73,8 +73,8 @@ Edita =() =>{
     buscarEmpleado.classList.toggle('oculto')
 }
 
-document.getElementById('fecha_nacimiento').addEventListener('blur', ()=>{
-// console.log(new Date(fechaNacimiento.value))
+document.getElementById('fecha_nacimiento').addEventListener('blur', () => {
+    // console.log(new Date(fechaNacimiento.value))
     let fechaActual = new Date()
 
     let fechaHoy = `${fechaActual.getFullYear()}-${fechaActual.getMonth() + 1}-${fechaActual.getDate()}`
@@ -102,34 +102,34 @@ document.getElementById('fecha_nacimiento').addEventListener('blur', ()=>{
 
 resetInput = () => {
     let formInput = document.querySelectorAll('#formulario input')
-    formInput.forEach( input => {
+    formInput.forEach(input => {
         input.value = '';
         input.disabled = false
         // input.required = false // dev
-    } )
+    })
 }
 
 bloqueaInputs = () => {
-        let formInput = document.querySelectorAll('#formulario input')
-    formInput.forEach( input => {
+    let formInput = document.querySelectorAll('#formulario input')
+    formInput.forEach(input => {
         input.value = '';
         input.disabled = true
         // input.required = false // dev
-    } )
+    })
 }
 
-llenaInputsData = ( array ) => {
+llenaInputsData = (array) => {
     // console.log(Object.entries(array))
     Object.entries(array[0]).forEach(([key, valor]) => {
         // console.log(key+' - '+valor)
-    const input = document.getElementsByName(key)[0]; 
-    if (input) {
-        if(valor == '0000-00-00') return
-        input.value = valor; 
-    }
-  });
+        const input = document.getElementsByName(key)[0];
+        if (input) {
+            if (valor == '0000-00-00') return
+            input.value = valor;
+        }
+    });
 
-  buscar.value = '';
+    buscar.value = '';
     // let formInput = document.querySelectorAll('#formulario input')
     // formInput.forEach( (input, index) => {
     //     if(array[index] !== undefined){
@@ -138,70 +138,70 @@ llenaInputsData = ( array ) => {
     // } )
 }
 
-const enviarFormulario  = async ( formulario ) =>{
+const enviarFormulario = async (formulario) => {
     let datos = new FormData();
-    datos.append( 'carga', JSON.stringify([formulario]) )
+    datos.append('carga', JSON.stringify([formulario]))
 
-console.log( 'desde el HTML ',formulario );
+    console.log('desde el HTML ', formulario);
 
-const resp = await fetch( 'http://localhost/BackNominas/public/inserta_empleado',{
-        method:'POST',
+    const resp = await fetch('http://localhost/BackNominas/public/inserta_empleado', {
+        method: 'POST',
         body: datos,
         redirect: "follow",
-    } )
+    })
     console.log('termino')
     const respData = await resp.json();
     console.log('desde el PHP', respData);
-    if(respData[0].resultado == 0){
+    if (respData[0].resultado == 0) {
         alert('Usuario almacenado con exito')
         resetInput();
-    }else if(respData[0].resultado == 1){
+    } else if (respData[0].resultado == 1) {
         alert('Error: El usuario que intenta almacenar ya existe!!')
-    }else if(respData[0].resultado == 2){
+    } else if (respData[0].resultado == 2) {
         alert('Error: El correo ya existe!!')
     }
 }
 
 const actualizaEmpleados = async () => {
-    const datos = new FormData( formulario );
+    const datos = new FormData(formulario);
     // const datosObj = Object.fromEntries( datos.entries() );
-    datos.append( 'carga', JSON.stringify([Object.fromEntries( datos.entries() )]) );
+    datos.append('carga', JSON.stringify([Object.fromEntries(datos.entries())]));
 
     // console.log( 'desde el HTML ',formulario );
 
-    const resp = await fetch( 'http://localhost/BackNominas/public/actualizaAltaEmpleado',{
-        method:'POST',
+    const resp = await fetch('http://localhost/BackNominas/public/actualizaAltaEmpleado', {
+        method: 'POST',
         body: datos,
         redirect: "follow",
-    } )
+    })
     console.log('termino')
     const respData = await resp.json();
     console.log('desde el PHP', respData);
-    if(respData[0].resp == 1){
+    if (respData[0].resp == 1) {
         alert('Datos actualizados correctamente');
-         enviarEdicion.disabled = true;
+        enviarEdicion.disabled = true;
         bloqueaInputs();
     }
 }
 
 buscarEmpleado_A = async () => {
 
-    if(buscar.value == '') {
+    if (buscar.value == '') {
         alert('ingresa un codigo de empleado')
         return
     }
-    const resp = await fetch( 'http://localhost/BackNominas/public/buscaEmpleadoEdicion', {
+    const resp = await fetch('http://localhost/BackNominas/public/buscaEmpleadoEdicion', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'empleado': buscar.value})
+        body: JSON.stringify({ 'empleado': buscar.value })
     })
     const data = await resp.json();
-    console.log('desde el PHP ',data)
-    if( data[0].resultado == 0 ){
+    console.log('desde el PHP ', data)
+    if (data[0].resultado == 0) {
         alert('el usuario no existe')
-        return 
+        return
     }
     resetInput();
     llenaInputsData(data)
@@ -209,51 +209,61 @@ buscarEmpleado_A = async () => {
 
 }
 
-// set 
-//  `codigo_empleado` VARCHAR(50), 
-//  `empleado` VARCHAR(200), 
-//  `estatus` VARCHAR(50), 
-//  `puesto` VARCHAR(250), 
-//  `departamento` VARCHAR(250), 
-//  `salario_dia` DECIMAL(10,2), 
-//  `sueldo_mensual` DECIMAL(10,2), 
-//  `RFC` VARCHAR(100), 
-//  `NSS` VARCHAR(100), 
-//  `CURP` VARCHAR(255), 
-//  `fecha_ingreso` DATE, 
-//  `fecha_reingreso` DATE, 
-//  `fecha_baja` DATE, 
-//  `domicilio` VARCHAR(300), 
-//  `codigo_pos` INT, 
-//  `estado` VARCHAR(250), 
-//  `fecha_nacimiento` DATE, 
-//  `decimal` DECIMAL(10,2), 
-//  `edad` INT, 
-//  `telefono` INT, 
-//  `sexo` VARCHAR(50), 
-//  `estado_civil` VARCHAR(100), 
-//  `correo` VARCHAR(255)
+// CURP
+// NSS
+// RFC
+// acum_ausentismos
+// acum_exento_aguinaldo
+// acum_exento_prima_vac
+// acum_fondo_ahorro
+// acum_incapacidades
+// acum_infonavit
+// acum_seguro_daños_info
+// aguinaldo_SDI
+// base_gravable_pendiente
+// bono_puntualidad
+// codigo_empleado
+// cuota_sindical
+// despensa_SDI
+// dias_a_pagar
+// dias_año
+// dias_bimestre
+// dias_infonavit
+// dias_vales_despensa_efectivo
+// dias_vales_despensa_especie
+// emp_data_id
+// empleado
+// empleado_id
+// faltas_periodo
+// fecha_ingreso
+// fondo_ahorro_QNA
+// fondo_ahorro_SDI
+// fondo_ahorro_SEM
+// gratificacion
+// horas_turno
+// incapacidades
+// indemnizacion_20_dias
+// indemnizacion_90_dias
+// infonavit_CF
+// infonavit_FD
+// infonavit_porcent
+// pension_alimanticia
+// prestacion_aguinaldo
+// prestacion_pv
+// prestacion_vacaciones
+// prima_antiguedad
+// prima_vacacional_SDI
+// puesto
+// salario_diario
+// salario_diario_integrado
+// salario_minimo_general
+// septimo_dia
+// tipo_nomina
+// uma
+// umi
+// vacaciones_pendientes
+// vales_despensa_QNA
+// vales_despensa_SEM
+// variable_SDI
 
-// codigo_empleado = codigo_empleado1,
-// empleado = empleado1,
-// estatus = estatus1,
-// puesto = puesto1,
-// departamento = departamento1,
-// salario_dia = salario_dia1,
-// sueldo_mensual = sueldo_mensual1,
-// RFC = RFC1,
-// NSS = NSS1,
-// CURP = CURP1,
-// fecha_ingreso = fecha_ingreso1,
-// fecha_reingreso = fecha_reingreso1,
-// fecha_baja = fecha_baja1,
-// domicilio = domicilio1,
-// codigo_pos = codigo_pos1,
-// estado = estado1,
-// fecha_nacimiento = fecha_nacimiento1,
-// _decimal = decimal1,
-// edad = edad1,
-// telefono = telefono1,
-// sexo = sexo1,
-// estado_civil = estado_civil1,
-// correo = correo1,
+
