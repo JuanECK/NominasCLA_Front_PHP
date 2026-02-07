@@ -33,7 +33,8 @@ const getAntiguedad = () => {
     // let ingreso = new Date("2016/08/15")
     // console.log(seteaFecha(carga[0].fecha_ingreso))
     let baja = new Date(seteaFecha(document.getElementById('fechaAntiguedad').value))
-    let ingreso = new Date(seteaFecha(carga[0].fecha_ingreso))
+    let ingreso = new Date(seteaFecha(document.getElementById('fechaIngreso').value))
+    // let ingreso = new Date(seteaFecha(carga[0].fecha_ingreso))
 
     const diferencia = (baja - ingreso) / (1000 * 60 * 60 * 24);
     const resultado = (diferencia +1) / 365;
@@ -41,13 +42,15 @@ const getAntiguedad = () => {
 
      if(isNaN(resultado)) {return}
     document.getElementById('tdAntiguedad').innerText = antiguedad;
+    document.getElementById('antiguedadVeinteDias').innerText = Math.trunc(antiguedad);
+
     // console.log(antiguedad)
 
     calculaDiasAguinaldo();
     CalculadiasPrimaVacacional();
 }
 
-fechaInicioAñoActual = () =>{
+const fechaInicioAñoActual = () =>{
     calculaDiasAguinaldo();
 }
 
@@ -62,9 +65,11 @@ const calculaDiasAguinaldo = () =>{
     // T = carga[0].fecha_ingreso
     // let ingreso = new Date(T.replace(/-/g, '\/'))
 
-    let ingreso = new Date(seteaFecha(carga[0].fecha_ingreso))
+    // let ingreso = new Date(seteaFecha(carga[0].fecha_ingreso))
+    let ingreso = new Date(seteaFecha(document.getElementById('fechaIngreso').value))
     let baja = new Date(seteaFecha(document.getElementById('fechaAntiguedad').value))
-    let añoActual = new Date(seteaFecha(getAñoActual()))
+    // let añoActual = new Date(seteaFecha(getAñoActual()))
+    let añoActual = new Date(seteaFecha(document.getElementById('añoActual').value))
     const msPorDia = 24 * 60 * 60 * 1000;
 
   // Condición ? Valor_Si_Verdadero : Valor_Si_Falso
@@ -78,7 +83,8 @@ const calculaDiasAguinaldo = () =>{
 }
 
 const CalculadiasPrimaVacacional = () => {
-    let ingreso = new Date(seteaFecha(carga[0].fecha_ingreso)) // morado
+    // let ingreso = new Date(seteaFecha(carga[0].fecha_ingreso)) // morado
+    let ingreso = new Date(seteaFecha(document.getElementById('fechaIngreso').value)) // morado
     let baja = new Date(seteaFecha(document.getElementById('fechaAntiguedad').value)) // celeste
     let ultimoAniversario = new Date(seteaFecha(document.getElementById('fechaultimoAniversario').value)) // naranja
     const msPorDia = 24 * 60 * 60 * 1000;
@@ -88,15 +94,49 @@ const CalculadiasPrimaVacacional = () => {
     const diferencia = (baja > ultimoAniversario) ? (baja - ultimoAniversario) : (ultimoAniversario - ingreso);
     let resultado = (diferencia / msPorDia) + 1;
 
-    if( isNaN(resultado) ) {return}
+    const diasVacacionesdiferencia = (baja > ultimoAniversario) ? (baja - ultimoAniversario) : (baja - ingreso);
+    let resDiaVacaciones = (diasVacacionesdiferencia / msPorDia) + 1;
 
-     document.getElementById('diasPrimaVacacional').innerText = resultado
+    if( isNaN(resultado) ) {return}
+     document.getElementById('diasPrimaVacacional').innerText = resultado;
+
+    if ( isNaN( resDiaVacaciones ) ){return}
+    document.getElementById('diasVacaciones').innerText = resDiaVacaciones;
+
 }
 
+const FechaIngresosAntiguedad = () =>{
+getAntiguedad();
+}
+
+const diasPagar = () =>{
+    document.getElementById('diasImss').innerText = document.getElementById('dias_a_pagar').value
+}
+
+const guardaCambiosPropiedades = (id) =>{
+// document.getElementById(id).value
+console.log(document.getElementById(id).value+' - '+id)
+}
+
+const soloDigito = (id) => {
+    let entrada = document.getElementById(id).value;
+    let ultimoDigito = entrada.slice(-1);
+    let resultado;
+
+        if( isNaN(ultimoDigito) && ultimoDigito != '.'  ){
+            resultado = entrada.slice(0,-1);
+            document.getElementById(id).value = resultado 
+            return
+            
+        }
+        document.getElementById(id).value = entrada  
+  }
+
 const iniciaSelects = () => {
-document.getElementsByName('indemnizacion_90_dias')[0].value = carga[0].indemnizacion_90_dias;
-document.getElementsByName('indemnizacion_20_dias')[0].value = carga[0].indemnizacion_20_dias;
-document.getElementsByName('prima_antiguedad')[0].value = carga[0].prima_antiguedad;
+    document.getElementsByName('indemnizacion_90_dias')[0].value = carga[0].indemnizacion_90_dias;
+    document.getElementsByName('indemnizacion_20_dias')[0].value = carga[0].indemnizacion_20_dias;
+    document.getElementsByName('prima_antiguedad')[0].value = carga[0].prima_antiguedad;
+    document.getElementsByName('septimo_dia')[0].value = carga[0].septimo_dia;
 }
 
 
@@ -170,11 +210,11 @@ const creaTablaPropiedades = ( array ) => {
         <tbody>
         <tr>
             <td>FECHA DE INGRESO Y/O ANTIGÜEDAD:</td>
-            <td><input type="date" name="" value="${array[0].fecha_ingreso}" id=""></td>
+            <td><input type="date" name="" value="${array[0].fecha_ingreso}" id="fechaIngreso" onblur="FechaIngresosAntiguedad()"></td>
             <td>SALARIO DIARIO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].salario_diario}" oninput="soloDigito('salario_diario')" onblur="guardaCambiosPropiedades('salario_diario')" id="salario_diario"></td>
             <td>INFONAVIT %:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].infonavit_porcent}" oninput="soloDigito('infonavit_porcent')" onblur="guardaCambiosPropiedades('infonavit_porcent')" id="infonavit_porcent"></td>
             <td>VACACIONES PENDIENTES:</td>
             <td></td>
         </tr>
@@ -182,9 +222,9 @@ const creaTablaPropiedades = ( array ) => {
             <td>FECHA DE BAJA:</td>
             <td><input type="date" name="" id="fechaAntiguedad" onblur="getAntiguedad()"></td>
             <td>SALARIO DIARIO INTEGRADO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].salario_diario_integrado}" oninput="soloDigito('salario_diario_integrado')" onblur="guardaCambiosPropiedades('salario_diario_integrado')" id="salario_diario_integrado"></td>
             <td>INFONAVIT F.D.:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].infonavit_FD}" oninput="soloDigito('infonavit_FD')" onblur="guardaCambiosPropiedades('infonavit_FD')" id="infonavit_FD"></td>
             <td>ACUM AUSENTISMOS:</td>
             <td></td>
         </tr>
@@ -192,19 +232,19 @@ const creaTablaPropiedades = ( array ) => {
             <td>FECHA ULTIMO ANIVERSARIO:</td>
             <td><input type="date" name="" id="fechaultimoAniversario" onblur="CalculadiasPrimaVacacional()"></td>
             <td>SALARIO P/INDEMNIZACIONES:</td>
-            <td></td>
+            <td>!!!RESOLVER!!!</td>
             <td>INFONAVIT C.F.:</td>
+            <td><input type="text" value="${array[0].infonavit_CF}" oninput="soloDigito('infonavit_CF')" onblur="guardaCambiosPropiedades('infonavit_CF')" id="infonavit_CF"></td>
             <td></td>
-            <td>11:</td>
             <td></td>
         </tr>
         <tr>
             <td>FECHA INICIO DEL AÑO ACTUAL:</td>
-            <td><input type="date" name="" value="${getAñoActual()}" onblur="fechaInicioAñoActual()" id=""></td>
+            <td><input type="date" name="" value="${getAñoActual()}" onblur="fechaInicioAñoActual()" id="añoActual"></td>
             <td>SALARIO TOPE PRIMA ANTIGÜEDAD:</td>
-            <td></td>
+            <td id="salarioTopePrimaAntiguedad">${array[0].salario_minimo_general * 2}</td>
             <td>DIAS IMSS:</td>
-            <td></td>
+            <td id="diasImss" >${array[0].dias_a_pagar}</td>
             <td>ACUM INCAPACIDADES:</td>
             <td></td>
         </tr>
@@ -212,7 +252,7 @@ const creaTablaPropiedades = ( array ) => {
             <td>ANTIGÜEDAD:</td>
             <td id="tdAntiguedad"></td>
             <td>UMA:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].uma}" oninput="soloDigito('uma')" onblur="guardaCambiosPropiedades('uma')" id="uma"></td>
             <td>DIAS BIMESTRE:</td>
             <td></td>
             <td>ACUM INFONAVIT:</td>
@@ -227,7 +267,7 @@ const creaTablaPropiedades = ( array ) => {
             </select>
             </td>
             <td>1SALARIO MINIMO GENERAL:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].salario_minimo_general}" oninput="soloDigito('salario_minimo_general')" onblur="guardaCambiosPropiedades('salario_minimo_general')" id="salario_minimo_general"></td>
             <td>DIAS INFONAVIT:</td>
             <td></td>
             <td>ACUM SEGURO DAÑOS INFO:</td>
@@ -242,7 +282,7 @@ const creaTablaPropiedades = ( array ) => {
             </select>
             </td>
             <td>DIAS A PAGAR:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].dias_a_pagar}" onchange="diasPagar()" oninput="soloDigito('dias_a_pagar')" onblur="guardaCambiosPropiedades('dias_a_pagar')" id="dias_a_pagar"></td>
             <td>VALES DESPENSA QNA:</td>
             <td></td>
             <td>ACUM FONDO AHORRO:</td>
@@ -257,7 +297,7 @@ const creaTablaPropiedades = ( array ) => {
             </select>
             </td>
             <td>HORAS DEL TURNO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].horas_turno}" oninput="soloDigito('horas_turno')" onblur="guardaCambiosPropiedades('horas_turno')" id="horas_turno"></td>
             <td>VALES DESPENSA SEM:</td>
             <td></td>
             <td>ACUM EXENTO PRIMA VAC:</td>
@@ -267,7 +307,7 @@ const creaTablaPropiedades = ( array ) => {
             <td>DIAS AGUINALDO:</td>
             <td id="dias_aguinaldo"></td>
             <td>FALTAS DEL PERIODO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].faltas_periodo}" oninput="soloDigito('faltas_periodo')" onblur="guardaCambiosPropiedades('faltas_periodo')" id="faltas_periodo"></td>
             <td>FONDO AHORRO QNA:</td>
             <td></td>
             <td>ACUM EXENTO AGUINALDO:</td>
@@ -277,7 +317,7 @@ const creaTablaPropiedades = ( array ) => {
             <td>DIAS PRIMA VACACIONAL:</td>
             <td id="diasPrimaVacacional"></td>
             <td>INCAPACIDADES:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].incapacidades}" oninput="soloDigito('incapacidades')" onblur="guardaCambiosPropiedades('incapacidades')" id="incapacidades"></td>
             <td>FONDO AHORRO SEM:</td>
             <td></td>
             <td>BASE GRAVABLE PENDIENTE:</td>
@@ -285,52 +325,57 @@ const creaTablaPropiedades = ( array ) => {
         </tr>
         <tr>
             <td>DIAS VACACIONES:</td>
-            <td></td>
+            <td id="diasVacaciones"></td>
             <td>DIAS PARA VALES DESPENSA EFECTIVO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].dias_vales_despensa_efectivo}" oninput="soloDigito('dias_vales_despensa_efectivo')" onblur="guardaCambiosPropiedades('dias_vales_despensa_efectivo')" id="dias_vales_despensa_efectivo"></td>
             <td>CUOTA SINDICAL:</td>
             <td></td>
-            <td>11:</td>
+            <td></td>
             <td></td>
         </tr>
         <tr>
             <td>PRESTACION VACACIONES:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].prestacion_vacaciones}" oninput="soloDigito('prestacion_vacaciones')" onblur="guardaCambiosPropiedades('prestacion_vacaciones')" id="prestacion_vacaciones"></td>
             <td>DIAS PARA VALES DESPENSA ESPECIE:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].dias_vales_despensa_especie}" oninput="soloDigito('dias_vales_despensa_especie')" onblur="guardaCambiosPropiedades('dias_vales_despensa_especie')" id="dias_vales_despensa_especie"></td>
             <td>PENSION ALIMENTICIA:</td>
             <td></td>
-            <td>11:</td>
+            <td></td>
             <td></td>
         </tr>
         <tr>
             <td>PRESTACION PV:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].prestacion_pv}" oninput="soloDigito('prestacion_pv')" onblur="guardaCambiosPropiedades('prestacion_pv')" id="prestacion_pv"></td>
             <td>ANTIGÜEDAD PARA 20 DIAS:</td>
-            <td></td>
+            <td id="antiguedadVeinteDias"></td>
             <td>BONO DE PUNTUALIDAD:</td>
             <td></td>
-            <td>11:</td>
+            <td></td>
             <td></td>
         </tr>
         <tr>
             <td>PRESTACION AGUINALDO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].prestacion_aguinaldo}" oninput="soloDigito('prestacion_aguinaldo')" onblur="guardaCambiosPropiedades('prestacion_aguinaldo')" id="prestacion_aguinaldo"></td>
             <td>UMI:</td>
+            <td><input type="text" value="${array[0].umi}" oninput="soloDigito('umi')" onblur="guardaCambiosPropiedades('umi')" id="umi"></td>
             <td></td>
-            <td>11:</td>
             <td></td>
-            <td>11:</td>
+            <td></td>
             <td></td>
         </tr>
         <tr>
             <td>DIAS DEL AÑO:</td>
-            <td></td>
+            <td><input type="text" value="${array[0].dias_año}" oninput="soloDigito('dias_año')" onblur="guardaCambiosPropiedades('dias_año')" id="dias_año"></td>
             <td>SEPTIMO DIA:</td>
+            <td>
+            <select class="" name="septimo_dia" id="">
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
+            </select>
+            </td>
             <td></td>
-            <td>11:</td>
             <td></td>
-            <td>11:</td>
+            <td></td>
             <td></td>
         </tr>
     </tbody>
